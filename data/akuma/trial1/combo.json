@@ -1,0 +1,19 @@
+{
+    "desc": "normal corner bnb but the reset > kara demon\nis only a true combo on hugo",
+
+    "scheme": [
+        [
+            "JUMP FORWARD",
+            "DIVEKICK",
+            "CLOSE HEAVY PUNCH",
+            "LK TATSU",
+            "HK TATSU",
+            "JUMPING HEAVY PUNCH"
+        ],
+
+        [
+            "MP KARA",
+            "RAGING DEMON"
+        ]
+    ]
+}

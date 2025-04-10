@@ -1,6 +1,7 @@
 -- importing bitwise operations library
 local bit = require("bit")
 
+local clock = 0
 local curGame = {[1] = 0x200e504, [2] = 0x200e910, [3] = 0x2010167}
 local players = {curGame[1], curGame[2]}
 local charOffset = {
@@ -70,10 +71,10 @@ local seanHadouBurst = {name = "HADOU BURST", address = 104010050}
 local trialComboMoves = {
     ALEX = {
         [1] = {
-            segment1 = {
+            [1] = {
                 {move = alexIdle, greenFrames = 1000, hitDetected = true},
             },
-            segment2 = {
+            [2] = {
                 {move = alexHPFlashChop, greenFrames = 0, hitDetected = false},
                 {move = alexMP, greenFrames = 0, hitDetected = false},
                 {move = alexLPFlashChop, greenFrames = 0, hitDetected = false},
@@ -83,7 +84,7 @@ local trialComboMoves = {
     },
     KEN = {
         [1] = {
-            segment1 = {
+            [1] = {
                 {move = kenJumpForward, greenFrames = 0, hitDetected = true},
                 {move = kenJMK, greenFrames = 0, hitDetected = false},
                 {move = kenCMP, greenFrames = 0, hitDetected = false},
@@ -91,7 +92,7 @@ local trialComboMoves = {
                 {move = kenEXTatsu, greenFrames = 0, hitDetected = false},
                 {move = kenEXShoryuken, greenFrames = 0, hitDetected = false},
             },
-            segment2 = {
+            [2] = {
                 {move = kenJumpForward, greenFrames = 0, hitDetected = false},
                 {move = kenJHP, greenFrames = 0, hitDetected = false},
                 {move = kenCMP, greenFrames = 0, hitDetected = false},
@@ -101,11 +102,11 @@ local trialComboMoves = {
             }
         },
         [2] = {
-            segment1 = {
+            [1] = {
                 {move = kenLightShoryuken, greenFrames = 0, hitDetected = false},
                 {move = kenShippuJinraikyaku, greenFrames = 0, hitDetected = false},
             },
-            segment2 = {
+            [2] = {
                 {move = kenShippuJinraikyaku, greenFrames = 0, hitDetected = false},
                 {move = kenLightShoryuken, greenFrames = 0, hitDetected = false},
             }
@@ -113,7 +114,7 @@ local trialComboMoves = {
     },
     AKUMA = {
         [1] = {
-            segment1 = {
+            [1] = {
                 {move = akumaJumpForward, greenFrames = 0, hitDetected = false},
                 {move = akumaDivekick, greenFrames = 0, hitDetected = false},
                 {move = akumaCHP, greenFrames = 0, hitDetected = false},
@@ -121,7 +122,7 @@ local trialComboMoves = {
                 {move = akumaHTatsu, greenFrames = 0, hitDetected = false},
                 {move = akumaJHP, greenFrames = 0, hitDetected = false},
             },
-            segment2 = {
+            [2] = {
                 {move = akumaKara, greenFrames = 0, hitDetected = false},
                 {move = akumaDemon, greenFrames = 0, hitDetected = false},
             }
@@ -129,61 +130,60 @@ local trialComboMoves = {
         -- test trial for sata, hi sata!!
         -- HIHI TOUCH !!
         [3] = {
-            segment1 = {
+            [1] = {
                 {move = akumaJumpForward, greenFrames = 0, hitDetected = false},
                 --ik it says jumpforward here but its actually just his idle animation action
                 {move = akumaTestCHP, greenFrames = 0, hitDetected = false},
             },
-            segment2 = {
+            [2] = {
                 {move = akumaTestCHP, greenFrames = 0, hitDetected = false},
             }
         },
         [2] = {
-            segment1 = {
+            [1] = {
                 {move = akumaJumpForward, greenFrames = 0, hitDetected = true},
                 {move = akumaDivekick, greenFrames = 0, hitDetected = false},
                 {move = akumaCHP, greenFrames = 0, hitDetected = false},
                 {move = akumaLKTatsu, greenFrames = 0, hitDetected = false},
             },
-            segment2 = {
+            [2] = {
                 {move = akumaJumpForward, greenFrames = 0, hitDetected = true},
                 {move = akumaCLP, greenFrames = 0, hitDetected = false},
                 {move = akumaCRHP, greenFrames = 0, hitDetected = false},
                 {move = akumaLKTatsu, greenFrames = 0, hitDetected = false},
             },
-            segment3 = {
+            [3] = {
                 {move = akumaCLP, greenFrames = 0, hitDetected = false},
                 {move = akumaDivekick, greenFrames = 0, hitDetected = false},
                 {move = akumaCMK, greenFrames = 0, hitDetected = false},
                 {move = akumaLKTatsu, greenFrames = 0, hitDetected = false},
             },
-            segment4 = {
+            [4] = {
                 {move = akumaCLP, greenFrames = 0, hitDetected = false},
                 {move = akumaKara, greenFrames = 0, hitDetected = false},
                 {move = akumaDemon, greenFrames = 0, hitDetected = false},
-            },
-            segment5 = {}
+            }
         }
     },
     HUGO = {
         [1] = {
-            segment1 = {
+            [1] = {
                 {move = hugoMediumUltraThrow, greenFrames = 0, hitDetected = false},
                 {move = hugoHeavyPalmBomber,  greenFrames = 0, hitDetected = false},
             },
-            segment2 = {
+            [2] = {
                 {move = hugoHeavyPalmBomber, greenFrames = 0, hitDetected = false},
             },
-            segment3 = {
+            [3] = {
                 {move = hugoHeavyPalmBomber, greenFrames = 0, hitDetected = false},
             },
-            segment4 = {
+            [4] = {
                 {move = hugoHeavyPalmBomber, greenFrames = 0, hitDetected = false},
             },
-            segment5 = {
+            [5] = {
                 {move = hugoHeavyPalmBomber, greenFrames = 0, hitDetected = false},
             },
-            segment6 = {
+            [6] = {
                 {move = hugoMegatonPress,   greenFrames = 0, hitDetected = false},
                 {move = hugoMoonsaultPress, greenFrames = 0, hitDetected = false},
             },
@@ -191,19 +191,19 @@ local trialComboMoves = {
     },
     SEAN = {
         [1] = {
-            segment1 = {
+            [1] = {
                 {move = seanEXTatsu, greenFrames = 0, hitDetected = false},
                 {move = seanCRMK,    greenFrames = 0, hitDetected = false},
             },
-            segment2 = {
+            [2] = {
                 {move = seanEXTatsu, greenFrames = 0, hitDetected = false},
                 {move = seanCRMK,    greenFrames = 0, hitDetected = false},
             },
-            segment3 = {
+            [3] = {
                 {move = seanEXTatsu, greenFrames = 0, hitDetected = false},
                 {move = seanCRMK,    greenFrames = 0, hitDetected = false},
             },
-            segment4 = {
+            [4] = {
                 {move = seanEXTatsu,  greenFrames = 0, hitDetected = false},
                 {move = seanHadouBurst, greenFrames = 0, hitDetected = false},
             },
@@ -312,15 +312,7 @@ local selectedChar = 1
 local selectedBox = 1
 local menuVisible = true
 local savestateLoaded = false
-local firstFrame = true
-local buttonPressed = false
-local inputBlockFrames = 0
-local BLOCK_FRAMES = 30
-local pendingSavestate = false
-local startHoldFrames = 0
 local START_HOLD_THRESHOLD = 30
-local debugMessage = ""
-local debugTimer = 0
 local debugMode = false
 
 local segmentDelay = 0
@@ -338,7 +330,7 @@ local buttonMappings = {
     [9] = "P1 Coin"
 }
 
-function drawText(x, y, text, color)
+local function drawText(x, y, text, color)
     gui.text(x - 1, y, text, "black")
     gui.text(x + 1, y, text, "black")
     gui.text(x, y - 1, text, "black")
@@ -346,10 +338,11 @@ function drawText(x, y, text, color)
     gui.text(x, y, text, color or COLORS.text)
 end
 
-function pullSave()
+local function pullSave()
     local file = io.open("combo_trial_completion.bin", "r")
 
     if file == nil then
+        -- make file & clear save
         local temp = assert(io.open("combo_trial_completion.bin", "w"))
         temp:write(0)
         temp:close()
@@ -364,7 +357,7 @@ function pullSave()
     return data
 end
 
-function readTrialStatus(data, charIndex, trialIndex)
+local function readTrialStatus(data, charIndex, trialIndex)
     local index = toBinaryIndex(charIndex, trialIndex)
 
     if (bit.band(data, index) == index) then
@@ -374,7 +367,7 @@ function readTrialStatus(data, charIndex, trialIndex)
     return false
 end
 
-function writeTrialCompletion(currentCharacter, trialIndex)
+local function writeTrialCompletion(currentCharacter, trialIndex)
     -- get data
     local data = pullSave()
 
@@ -402,13 +395,13 @@ function toCharIndex(findchar)
     return nil
 end
 
-function drawBox(x, y, width, height, isSelected, isCompleted)
+local function drawBox(x, y, width, height, isSelected, isCompleted)
     local outline = isSelected and COLORS.highlight or COLORS.box
     local fillColor = isCompleted and COLORS.completed or COLORS.background
     gui.box(x, y, x + width, y + height, fillColor, outline)
 end
 
-function drawTrialBoxes(x, y, charIndex)
+local function drawTrialBoxes(x, y, charIndex)
     local boxWidth = 5
     local boxHeight = 5
     local spacing = 2
@@ -423,7 +416,7 @@ function drawTrialBoxes(x, y, charIndex)
     end
 end
 
-function drawTrialExplanation()
+local function drawTrialExplanation()
     local char = characters[selectedChar]
     local desc = nil
     if trialDescriptions[char] then
@@ -441,7 +434,7 @@ function drawTrialExplanation()
     end
 end
 
-function drawCharacterPanel()
+local function drawCharacterPanel()
     local panelWidth = 120
     local panelX = emu.screenwidth() - panelWidth - 5
     local itemHeight = 10
@@ -454,7 +447,7 @@ function drawCharacterPanel()
     end
 end
 
-function drawHelpPanel()
+local function drawHelpPanel()
     drawBox(5, 5, 200, 100)
     local helpText = {
         "STREET FIGHTER 3: SECOND IMPACT COMBO TRIALS",
@@ -471,7 +464,7 @@ function drawHelpPanel()
     end
 end
 
-function drawCreditPanel()
+local function drawCreditPanel()
     drawBox(5, 160, 374, 50)
     local creditText = {
         "made by zizi",
@@ -484,16 +477,9 @@ function drawCreditPanel()
     end
 end
 
-function showDebug(message)
-    debugMessage = message
-    debugTimer = 180
-    print(message)
-end
-
-function loadCharacterTrial(char, trial)
-    showDebug("Loading savestate...")
+local function loadCharacterTrial(char, trial)
+    print("Loading savestate...")
     menuVisible = false
-    currentCharacter = char
     if char == "KEN" and trial == 2 then
         local fsFilename = "ken2.fs"
         local frFilename = "ken2.fr"
@@ -509,63 +495,61 @@ function loadCharacterTrial(char, trial)
                 savestate.load(frFilename) 
             end)
             if success_fs and success_fr then
-                showDebug("Loaded Ken trial 2 (ken2.fs and ken2.fr)")
+                print("Loaded Ken trial 2 (ken2.fs and ken2.fr)")
                 savestateLoaded = true
-                inputBlockFrames = BLOCK_FRAMES
             else
-                showDebug("Error loading ken2.fs or ken2.fr")
+                print("Error loading ken2.fs or ken2.fr")
             end
         else
-            showDebug("Error: Missing ken2.fs or ken2.fr savestate file")
+            print("Error: Missing ken2.fs or ken2.fr savestate file")
         end
     else
         local filename = char:lower() .. trial .. ".fs"
         local f = io.open(filename, "r")
         if f then
             f:close()
-            showDebug("Found savestate file: " .. filename)
+            print("Found savestate file: " .. filename)
             local success, err = pcall(function()
                 savestate.load(filename)
-                showDebug("Savestate loaded")
+                print("Savestate loaded")
                 savestateLoaded = true
-                inputBlockFrames = BLOCK_FRAMES
             end)
             if not success then
-                showDebug("Error: " .. err)
+                print("Error: " .. err)
             end
         else
-            showDebug("Error: Savestate not found (" .. filename .. ")")
+            print("Error: Savestate not found (" .. filename .. ")")
         end
     end
 end
 
-function handleMenuInput()
+local function handleMenuInput()
     local inputs = joypad.get()
     if inputs["P1 Down"] and not guiinputs.P1.previousinputs["P1 Down"] then
         selectedChar = selectedChar % #characters + 1
-        showDebug("Selected: " .. characters[selectedChar])
+        print("Selected: " .. characters[selectedChar])
     elseif inputs["P1 Up"] and not guiinputs.P1.previousinputs["P1 Up"] then
         selectedChar = selectedChar - 1
         if selectedChar < 1 then selectedChar = #characters end
-        showDebug("Selected: " .. characters[selectedChar])
+        print("Selected: " .. characters[selectedChar])
     elseif inputs["P1 Right"] and not guiinputs.P1.previousinputs["P1 Right"] then
         selectedBox = selectedBox % 10 + 1
-        showDebug("Trial " .. selectedBox)
+        print("Trial " .. selectedBox)
     elseif inputs["P1 Left"] and not guiinputs.P1.previousinputs["P1 Left"] then
         selectedBox = selectedBox - 1
         if selectedBox < 1 then selectedBox = 10 end
-        showDebug("Trial " .. selectedBox)
+        print("Trial " .. selectedBox)
     end
     for i = 1, 9 do
         local button = buttonMappings[i]
         if inputs[button] and not guiinputs.P1.previousinputs[button] then
             if button == "P1 Coin" then
                 debugMode = not debugMode
-                showDebug("Debug Mode: " .. (debugMode and "ON" or "OFF"))
+                print("Debug Mode: " .. (debugMode and "ON" or "OFF"))
             else
                 local message = button .. " pressed for " .. characters[selectedChar] .. " trial " .. selectedBox
                 print(message)
-                showDebug(message)
+                print(message)
                 loadCharacterTrial(characters[selectedChar], selectedBox)
                 gui.transparency(100)
                 break
@@ -577,16 +561,19 @@ function handleMenuInput()
     end
 end
 
-function handleStartButton()
+local function handleStartButton()
     local inputs = joypad.get()
+    local startHoldFrames = 0
+
     if inputs["P1 Start"] then
         startHoldFrames = startHoldFrames + 1
         if startHoldFrames >= START_HOLD_THRESHOLD and not menuVisible then
             menuVisible = true
             savestateLoaded = false
             startHoldFrames = 0
-            showDebug("Menu opened")
+            print("Menu opened")
         end
+        
     else
         if startHoldFrames > 0 and startHoldFrames < START_HOLD_THRESHOLD and savestateLoaded then
             loadCharacterTrial(characters[selectedChar], selectedBox)
@@ -613,57 +600,22 @@ local function resetGreenFrames()
 end
 
 --this is such a fucking mess omg
-function updateGreenFrames()
-    if comboCompleted and not isStunned then 
-        return 
-    end
-    local segments = trialComboMoves[currentCharacter] and trialComboMoves[currentCharacter][selectedBox]
-    if not segments then 
-        return 
-    end
+local function updateGreenFrames()
+    if comboCompleted and not isStunned then return end
 
-    local activeSegment = nil
-    if currentCharacter == "AKUMA" then
-        if segments.segment1 and comboSegment == 1 then
-            activeSegment = segments.segment1
-        elseif segments.segment2 and comboSegment == 2 then
-            activeSegment = segments.segment2
-        elseif segments.segment3 and comboSegment == 3 then
-            activeSegment = segments.segment3
-        elseif segments.segment4 and comboSegment == 4 then
-            activeSegment = segments.segment4
-        elseif segments.segment5 and comboSegment == 5 then
-            activeSegment = segments.segment5
-        end
-    else
-        if comboSegment == 1 then
-            activeSegment = segments.segment1
-        elseif comboSegment == 2 then
-            activeSegment = segments.segment2
-        elseif comboSegment == 3 then
-            activeSegment = segments.segment3
-        elseif comboSegment == 4 then
-            activeSegment = segments.segment4
-        elseif comboSegment == 5 then
-            activeSegment = segments.segment5
-        elseif comboSegment == 6 then
-            activeSegment = segments.segment6
-        elseif comboSegment == 7 then
-            activeSegment = segments.segment7
-        elseif comboSegment == 8 then
-            activeSegment = segments.segment8
-        end
-    end
+    local segments = trialComboMoves[currentCharacter]
+    if not segments then return end
 
-    if not activeSegment then 
-        return 
-    end
+    local activeSegment = segments[comboSegment]
+    if not activeSegment then return end
+
+    local activeMove
 
     if debugMode then
         print(string.format("Current Segment: %d, Character: %s", comboSegment, currentCharacter or "none"))
-        for i, move in ipairs(activeSegment) do
+        for i, moveTable in ipairs(activeSegment) do
             print(string.format("Move %d: %s, Green Frames: %d, Hit Detected: %s",
-                i, move.move.name, move.greenFrames, tostring(move.hitDetected)))
+                i, moveTable.move.name, moveTable.greenFrames, tostring(moveTable.hitDetected)))
         end
     end
 
@@ -801,12 +753,14 @@ function updateGreenFrames()
         end
     end
 
+    -- combines both lists
     local combined = {}
     for _, segment in pairs(segments) do
         for _, move in ipairs(segment) do
             table.insert(combined, move)
         end
     end
+    -- check if any move is currently hit
     local anyActive = false
     for _, move in ipairs(combined) do
         if move.hitDetected then 
@@ -814,6 +768,7 @@ function updateGreenFrames()
             break 
         end
     end
+    -- if move is not currently hitting, skip resetting
     if not anyActive then 
         resetGreenFrames() 
         for _, move in ipairs(combined) do
@@ -823,7 +778,7 @@ function updateGreenFrames()
     end
 end
 
-function drawDynamicText()
+local function drawDynamicText()
     updateGreenFrames()
     local yPosition = 50
     local segments = trialComboMoves[currentCharacter] and trialComboMoves[currentCharacter][selectedBox]
@@ -852,14 +807,14 @@ function drawDynamicText()
     end
 end
 
-function onSavestateLoad() 
+local function onSavestateLoad() 
     resetGreenFrames() 
 end
 savestate.registerload(onSavestateLoad)
 
-function mainLoop()
+local function mainLoop()
     handleStartButton()
-    showDebug(memory.readdword(players[curPlayer] + charOffset[1]))
+    print(memory.readdword(players[curPlayer] + charOffset[1]))
     if menuVisible then
         handleMenuInput()
         drawHelpPanel()
@@ -880,6 +835,7 @@ function mainLoop()
 end
 
 while true do
+    clock = clock + 1
     mainLoop()
     emu.frameadvance()
 end
