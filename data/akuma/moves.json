@@ -1,0 +1,60 @@
+{
+  "name": "AKUMA",
+
+  "moves":{
+    "JUMP FORWARD": {
+      "address": 103596280,
+      "hidden": true,
+      "greenFrames": 1000
+    },
+    "DIVEKICK": {
+      "address": 103638780,
+      "greenFrames": 25
+    },
+    "CLOSE HEAVY PUNCH": {
+      "address": 103632092,
+      "greenFrames": 35
+    },
+    "CLOSE HEAVY PUNCH (TEST)": {
+      "address": 103632092,
+      "greenFrames": 180
+    },
+    "LK TATSU": {
+      "address": 103660928,
+      "greenFrames": 105
+    },
+    "CLOSE LIGHT PUNCH": {
+      "address": 103631116,
+      "greenFrames": 40
+    },
+    "CLOSE MEDIUM KICK": {
+      "address": 103632780,
+      "greenFrames": 23
+    },
+    "LIGHT PUNCH": {
+      "address": 104000600,
+      "greenFrames": 30
+    },
+    "CROUCHING HEAVY PUNCH": {
+      "address": 103633932,
+      "greenFrames": 35
+    },
+    "MP KARA": {
+      "address": 103631804,
+      "greenFrames": 60
+    },
+    "RAGING DEMON": {
+      "address": 103621536,
+      "greenFrames": 80
+    },
+    "HK TATSU": {
+      "address": 103661824,
+      "greenFrames": 110
+    },
+    "JUMPING HEAVY PUNCH": {
+      "address": 103637820,
+      "greenFrames": 40,
+      "hiddenMove": "JUMP FORWARD"
+    }
+  }
+}
